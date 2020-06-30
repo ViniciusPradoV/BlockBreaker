@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 441720591}
   - component: {fileID: 441720594}
   - component: {fileID: 441720593}
+  - component: {fileID: 441720595}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -293,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441720590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.7, y: 4.58, z: 0}
+  m_LocalPosition: {x: 7.092, y: 0.718, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -312,9 +313,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0084270835, y: 0.017898321}
+  m_Offset: {x: 0.0069329888, y: 0.011115015}
   serializedVersion: 2
-  m_Radius: 0.32614708
+  m_Radius: 0.20243603
 --- !u!50 &441720594
 Rigidbody2D:
   serializedVersion: 4
@@ -336,6 +337,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &441720595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441720590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bede22e01aeb545a651ce49ca1fd41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paddle: {fileID: 825096990}
 --- !u!1 &578093162
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825096985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.46, y: 0.38, z: 0}
+  m_LocalPosition: {x: 7.1, y: 0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -555,7 +569,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 0.64}
+    oldSize: {x: 2, y: 0.5}
     newSize: {x: 2.56, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -563,13 +577,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.66474056, y: 0.3203721}
-      - {x: -0.6601925, y: 0.3158229}
-      - {x: -1.2712741, y: 0.04509592}
-      - {x: -1.28, y: -0.32}
-      - {x: 1.28, y: -0.32}
-      - {x: 1.2629204, y: 0.050918937}
-      - {x: 1.0176439, y: 0.153822}
+    - - {x: 0.5148878, y: 0.2504406}
+      - {x: -0.47037888, y: 0.25588185}
+      - {x: -0.9715681, y: 0.06507659}
+      - {x: -1.0002747, y: -0.2500685}
+      - {x: 1.0002751, y: -0.25006896}
+      - {x: 0.973207, y: 0.050918937}
+      - {x: 0.9676938, y: 0.053920686}
 --- !u!114 &825096990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,7 +596,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a035f025becc44897e7026eeabe833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SCREEN_WIDTH: 16
+  SCREEN_WIDTH_IN_UNITS: 16
+  PADDLE_POS_MAX: 15
+  PADDLE_POS_MIN: 1
 --- !u!1 &1041386602
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1041386603
 BoxCollider2D:
   m_ObjectHideFlags: 0
