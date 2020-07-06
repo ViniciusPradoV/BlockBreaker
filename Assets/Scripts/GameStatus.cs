@@ -14,14 +14,24 @@ public class GameStatus : MonoBehaviour
     // State
     [SerializeField] int gameScore = 0;
 
-    // Cached Reference
-    Ball ball;
+    private void Awake()
+    {
+        int gameStatusCount = FindObjectsOfType<GameStatus>().Length;
+
+        if (gameStatusCount > 1)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        ball = FindObjectOfType<Ball>();
-
         scoreText.text = "Score: " + gameScore.ToString();
     }
 
@@ -33,7 +43,7 @@ public class GameStatus : MonoBehaviour
 
     public void AddToGameScore()
     {
-        if (ball.touchedBlock)
+        if (FindObjectOfType<Ball>().touchedBlock)
             gameScore = gameScore + pointsPerBlock*2;
         else
             gameScore = gameScore + pointsPerBlock;
