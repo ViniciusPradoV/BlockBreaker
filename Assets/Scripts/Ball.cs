@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     [SerializeField] float horizontalPush = 0f;
     [SerializeField] float verticalPush = 15f;
     [SerializeField] AudioClip[] ballSounds;
+    [SerializeField] float randomFactor = 0.2f;
    
 
     // State 
@@ -19,14 +20,16 @@ public class Ball : MonoBehaviour
 
     // Cached Component References
     AudioSource ballAudioSource;
-
-    // Cached paddle reference
+    Rigidbody2D ballRigidBody2D;
     Paddle paddleReference;
 
     private void Start()
     {
         paddleToBallVector = transform.position - paddle.transform.position;
+
         ballAudioSource = GetComponent<AudioSource>();
+
+        ballRigidBody2D = GetComponent<Rigidbody2D>();
 
         paddleReference = FindObjectOfType<Paddle>();
     }
@@ -66,6 +69,9 @@ public class Ball : MonoBehaviour
         Debug.Log(paddleReference);
         Debug.Log(collision.gameObject.name);
 
+        Vector2 velocityTweak = new Vector2(0f, 
+            Random.Range(0, randomFactor));
+
         if(collision.gameObject.name == paddleReference.name)
         {
             Debug.Log("comparou colisão com paddle");
@@ -75,6 +81,7 @@ public class Ball : MonoBehaviour
         if (hasStarted)
         {
             PlaySoundEffect();
+            ballRigidBody2D.velocity += velocityTweak;
         }
     }
 

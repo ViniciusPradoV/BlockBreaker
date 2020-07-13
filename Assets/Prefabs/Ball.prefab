@@ -95,7 +95,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.12874356
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -117,9 +117,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0069329888, y: 0.011115015}
+  m_Offset: {x: 0.0069330037, y: 0.014206231}
   serializedVersion: 2
-  m_Radius: 0.20243603
+  m_Radius: 0.27353117
 --- !u!114 &481061398185062639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,11 +134,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paddle: {fileID: 0}
   horizontalPush: 0
-  verticalPush: 15
+  verticalPush: 20
   ballSounds:
   - {fileID: 8300000, guid: 8c146c735c0e4dd4388ec23b8aac8327, type: 3}
   - {fileID: 8300000, guid: c1439bdb0a325fd41b5c3e4596f49707, type: 3}
   - {fileID: 8300000, guid: 58750626208f6cf4ab11cc12990b8a2e, type: 3}
+  randomFactor: 0.1
+  touchedBlock: 0
 --- !u!82 &1069854639
 AudioSource:
   m_ObjectHideFlags: 0
