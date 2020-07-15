@@ -10,12 +10,14 @@ public class Ball : MonoBehaviour
     [SerializeField] float verticalPush = 15f;
     [SerializeField] AudioClip[] ballSounds;
     [SerializeField] float randomFactor = 0.2f;
+    [SerializeField] float yVelIncrement = 3f;
    
 
     // State 
     Vector2 paddleToBallVector;
     bool hasStarted = false;
     public bool touchedBlock = false;
+    int collisionCounter = 0;
 
 
     // Cached Component References
@@ -62,6 +64,12 @@ public class Ball : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector2(horizontalPush, verticalPush);
             hasStarted = true;
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(15f, 0f);
+            hasStarted = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -69,8 +77,9 @@ public class Ball : MonoBehaviour
         Debug.Log(paddleReference);
         Debug.Log(collision.gameObject.name);
 
-        Vector2 velocityTweak = new Vector2(0f, 
-            Random.Range(0, randomFactor));
+        Vector2 velocityTweak = new Vector2(
+            Random.Range(-1, 1), 
+           0f);
 
         if(collision.gameObject.name == paddleReference.name)
         {
@@ -81,7 +90,9 @@ public class Ball : MonoBehaviour
         if (hasStarted)
         {
             PlaySoundEffect();
-            ballRigidBody2D.velocity += velocityTweak;
+            ballRigidBody2D.velocity += velocityTweak * randomFactor;
+            HorizontalLoopSolution();
+
         }
     }
 
@@ -94,5 +105,31 @@ public class Ball : MonoBehaviour
     public void TouchBlock()
     {
         touchedBlock = true;
+    }
+
+    // This is meant to get the ball stuck if ever stuck on an endless horizontal bouncing cycle
+    private void HorizontalLoopSolution()
+    {
+        CheckCollisionVelocityInY();
+        if (collisionCounter >= 4)
+        {
+            collisionCounter = 0;
+            IncrementYVelocity();
+        }
+    }
+
+    private void CheckCollisionVelocityInY()
+    {
+        if (ballRigidBody2D.velocity.y >= 0.2f)
+        {
+            collisionCounter++;
+        }
+    }
+
+
+    private void IncrementYVelocity()
+    {
+        Vector2 yVelocityVector = new Vector2(0f, yVelIncrement);
+        ballRigidBody2D.velocity += yVelocityVector;
     }
 }
